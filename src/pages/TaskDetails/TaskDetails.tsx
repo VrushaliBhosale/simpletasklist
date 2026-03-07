@@ -1,7 +1,7 @@
 import { Box, Button, Chip, CircularProgress, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate, useParams } from "react-router";
-import { useTask } from "../Tasks/queries";
+import { useTask } from "../../queries";
 
 export default function TaskDetails() {
   const { id } = useParams<{ id: string }>();
@@ -52,8 +52,8 @@ export default function TaskDetails() {
             task.status === "completed"
               ? "success"
               : task.status === "pending"
-                ? "warning"
-                : "default"
+              ? "warning"
+              : "default"
           }
         />
       </Box>

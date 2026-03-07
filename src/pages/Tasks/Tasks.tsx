@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import Table from "./Table";
 import { useState } from "react";
-import { useTasks } from "./queries";
+import { useTasks } from "../../queries";
 
 export default function Tasks() {
   const { data } = useTasks();

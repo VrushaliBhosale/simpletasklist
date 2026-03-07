@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import DeleteConfirmationDialog from "./DeleteConfirmationDialog";
+import DeleteConfirmationDialog from "../DeleteConfirmationDialog";
 
 describe("DeleteConfirmationDialog", () => {
   it("renders confirmation message when open", () => {

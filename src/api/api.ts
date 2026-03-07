@@ -1,5 +1,5 @@
-import tasks from "../../../utils/__mocks__/tasks";
-import type { Task } from "../types";
+import tasks from "../utils/__mocks__/tasks";
+import type { Task } from "../pages/Tasks/types";
 
 type TaskFormData = Omit<Task, "id">;
 

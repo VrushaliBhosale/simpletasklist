@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { taskKeys } from "../../../keys";
+import { taskKeys } from "../keys";
 import { addTask, deleteTask, editTask, getTask, getTasks } from "../api";
-import type { Task } from "../types";
+import type { Task } from "../pages/Tasks/types";
 
 type TaskFormData = Omit<Task, "id">;
 

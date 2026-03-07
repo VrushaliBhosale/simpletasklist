@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import TaskDialog from "../../TaskDialog";
 import type { Task } from "../../../pages/Tasks/types";
+import TaskDialog from "../TaskDialog";
 
 const mockTask: Task = {
   id: 1,

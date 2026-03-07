@@ -2,10 +2,10 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter, Route, Routes } from "react-router";
-import TaskDetails from "./TaskDetails";
-import * as api from "../Tasks/api";
+import TaskDetails from "../TaskDetails";
+import * as api from "../../../api";
 
-jest.mock("../Tasks/api");
+jest.mock("../../../api");
 
 const mockedApi = api as jest.Mocked<typeof api>;
 

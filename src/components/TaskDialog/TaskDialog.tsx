@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import type { Task } from "../pages/Tasks/types";
+import type { Task } from "../../pages/Tasks/types";
 
 type TaskFormData = Omit<Task, "id">;
 

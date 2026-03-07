@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import DeleteConfirmationDialog from "../../components/DeleteConfirmation/DeleteConfirmationDialog";
 import TaskDialog from "../../components/TaskDialog";
-import { useAddTask, useEditTask, useDeleteTask } from "./queries";
+import { useAddTask, useEditTask, useDeleteTask } from "../../queries";
 
 type TaskFormData = Omit<Task, "id">;
 
