@@ -1,9 +1,18 @@
 {
-  "extends": "./tsconfig.app.json",
   "compilerOptions": {
-    "verbatimModuleSyntax": false,
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "types": ["jest", "@testing-library/jest-dom"]
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "verbatimModuleSyntax": false,
+    "allowImportingTsExtensions": true,
+    "moduleDetection": "force",
+    "erasableSyntaxOnly": true,
+    "types": ["jest", "@testing-library/jest-dom", "node"]
   },
-  "include": ["src"]
+  "include": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/setupTests.ts"]
 }

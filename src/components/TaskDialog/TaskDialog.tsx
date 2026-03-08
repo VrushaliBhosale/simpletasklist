@@ -12,6 +12,11 @@ import type { Task } from "../../pages/Tasks/types";
 
 type TaskFormData = Omit<Task, "id">;
 
+type FormErrors = {
+  title?: string;
+  description?: string;
+};
+
 type TaskDialogProps = {
   open: boolean;
   task: Task | null;
@@ -25,6 +30,8 @@ const TaskDialog = ({ open, task, onClose, onSave }: TaskDialogProps) => {
     description: "",
     status: "todo",
   });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     if (open) {
@@ -37,8 +44,39 @@ const TaskDialog = ({ open, task, onClose, onSave }: TaskDialogProps) => {
             }
           : { title: "", description: "", status: "todo" }
       );
+      setErrors({});
+      setSubmitted(false);
     }
   }, [open, task]);
+
+  //RHF can be used for this and yup/zod for validations  
+  const validate = (data: TaskFormData): FormErrors => {
+    const newErrors: FormErrors = {};
+    if (!data.title.trim()) {
+      newErrors.title = "Title is required";
+    }
+    if (!data.description.trim()) {
+      newErrors.description = "Description is required";
+    }
+    return newErrors;
+  };
+
+  const handleChange = (field: keyof TaskFormData, value: string) => {
+    const updated = { ...form, [field]: value };
+    setForm(updated);
+    if (submitted) {
+      setErrors(validate(updated));
+    }
+  };
+
+  const handleSave = () => {
+    setSubmitted(true);
+    const validationErrors = validate(form);
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
+      onSave(form);
+    }
+  };
 
   const isEdit = task !== null;
 
@@ -51,9 +89,9 @@ const TaskDialog = ({ open, task, onClose, onSave }: TaskDialogProps) => {
         <TextField
           label="Title"
           value={form.title}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, title: e.target.value }))
-          }
+          onChange={(e) => handleChange("title", e.target.value)}
+          error={!!errors.title}
+          helperText={errors.title}
           fullWidth
           size="small"
           margin="dense"
@@ -61,9 +99,9 @@ const TaskDialog = ({ open, task, onClose, onSave }: TaskDialogProps) => {
         <TextField
           label="Description"
           value={form.description}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, description: e.target.value }))
-          }
+          onChange={(e) => handleChange("description", e.target.value)}
+          error={!!errors.description}
+          helperText={errors.description}
           fullWidth
           size="small"
           multiline
@@ -73,10 +111,7 @@ const TaskDialog = ({ open, task, onClose, onSave }: TaskDialogProps) => {
           label="Status"
           value={form.status}
           onChange={(e) =>
-            setForm((prev) => ({
-              ...prev,
-              status: e.target.value as Task["status"],
-            }))
+            handleChange("status", e.target.value)
           }
           select
           fullWidth
@@ -89,7 +124,7 @@ const TaskDialog = ({ open, task, onClose, onSave }: TaskDialogProps) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
-        <Button variant="contained" onClick={() => onSave(form)}>
+        <Button variant="contained" onClick={handleSave}>
           Save
         </Button>
       </DialogActions>
